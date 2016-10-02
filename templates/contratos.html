@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Procesos de Contratacion</title>  
+    <a href="/static/js/bootstrap.min.css" rel="stylesheet"/>
+    <a href="/static/js/jumbotron-narrow.css" rel="stylesheet"/> 
+  </head>
+  <body>
+    <br>
+    <form id="formid" method='POST', action='/guardar'>
+    <table class="table table-striped">
+    <thead>
+      <tr >
+        <th>Entidad </th>
+        <th>Tipo de Proceso</th>
+        <th>Cuantia</th>
+        <th>Estado del Proceso</th>
+        <th>Objeto del Proceso</th>
+        </tr>
+      </thead>
+      <tbody>
+
+    {% for x in cursor %}
+      <tr>
+        <td>{{ x.Entidad }} </td>
+        <td>{{ x.Tipo_proceso }}</td>
+        <td>{{ x.Cuantia }}</td>
+        <td>{{ x.Estado }}</td>
+        <td>{{ x.Objeto }}</td>
+        <td><input type="checkbox" class="contratos" id="contratos_{{ x._id }}" name="contratos" value="{{ x._id }}"> 
+        </td>
+      </tr>
+    {% endfor %}
+      </tbody>
+      </table>
+    </form>   
+        </body>
+      </html>
+

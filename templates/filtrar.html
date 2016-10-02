@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>Filtro de Contratos</title>  
+        <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+        <!--<script src="/static/jquery.min.js"></script>-->
+  </head>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <h2><a href="/" class="btn btn-default navbar-btn">Inicio</a>
+    <a href="/filtrar" class="btn btn-default navbar-btn">Filtrar Contratos</a>
+    <a href="/notificaciones" class="btn btn-default"> Preferencias </a>
+    <a href="/logout" class="btn btn-default navbar-btn">Cerrar Sesión</a></h2></div></div>
+    <!-- /.container -->
+</nav>
+
+
+  <body>
+    <div class="container"> <div class="header"> <h3 class="text-muted">Filtro de contratos</h3></div>
+
+    <div class="panel panel-default"> <div class="panel-heading"><h2 align="center"><b>Filtrar Contratos</b></h2></div>
+        <div class="panel-body"> <p align="justify">Seleccione criterios de su interés para hacer la búsqueda; después de presionar el boton <b>Guardar</b> será redireccionado a la sección de preferencias para visualizar las respectivas recomendaciones de los procesos seleccionados.</p><br>
+              <div> <label> Tipo de Proceso </label> <div class="btn-group">
+                   <form id='form' method=POST >
+                        <select id="proceso" name='proceso'class="form-control" data-style="btn-info">
+                            <option selected value="0"> Elige una opción </option>
+                            <option value="1" >Contratación Directa (Ley 1150 de 2007)</option>
+                            <option value="2">Selección Abreviada de Menor Cuantía (Ley 1150 de 2007)</option>
+                            <option value="3">Contratación Mínima Cuantía</option>
+                            <option value="4">Subasta</option>
+                            <option value="5">Concurso de Méritos Abierto</option>
+                            <option value="6">Licitación Pública</option>
+                            <option value="7">Régimen Especial</option>
+                            <option value="8">Selección Abreviada servicios de Salud</option>
+                            <option value="9">Selección Abreviada del literal h del numeral 2 del artículo 2 de la Ley 1150 de 2007</option>
+                            <option value="10">Iniciativa Privada sin recursos públicos</option>
+                            <option value="11">Concurso de Méritos con Lista Corta</option>
+                        </select> </div>
+                </div>
+              
+                         <br>
+                <div> <label> Valor del Contrato </label> <div class="btn-group">
+                        <select id='cuantia' name="cuantia" class="form-control" data-style="btn-info">
+                              <option selected value="0"> seleccione un rango </option>
+                              <option value="1"> 0 - 50.000.000 </option>
+                              <option value="2">50.000.001 - 200.000.000</option>
+                              <option value="3">200.000.001 - 500.000.000</option>
+                              <option value="4">500.000.001 - 2.000.000.000</option>
+                              <option value="5">Mayores a:  2.000.000.0001 </option>
+                            </select></div>
+                </div>
+                          <br>  
+               <div > <label> Objeto del Contrato</label> <input id='objeto' class="form-control" type="text" name="objeto"/>
+              </div>
+                  </form>
+                          <br>                           
+                    <p class="lead"></p> <p><a id='buscar' class="btn btn-lg btn-success" href="/filtros" target="contratos" role="button">Buscar</a></p>
+                          <br>
+                  <div>
+        <p><a id='guardar' class="btn btn-lg btn-success" href="#" target="contratos" role="button" style='display:none;'>Guardar</a></p>
+        </div>
+              </div>
+                      <div id='response' class='col-lg-12 col-md-12 col-sm-12 col-xs-12' style='width: 100%;height: 500px;overflow-y: scroll;display:none;'> </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+
+    $(document).on('ready', function(){
+        $('#buscar').on('click', function(e){
+          e.preventDefault();
+          var form = $('#form').serialize();
+          $.get('/filtros?'+form, function(response){
+            $('#response').html(response).show();
+            $('#guardar').show()
+          })
+        });
+    });
+
+      $(document).on('ready', function(){
+          $('#guardar').on('click',function(e) {
+              e.preventDefault();
+             $('#formid').submit();
+             //$('#response').html(response).show();
+
+          });
+      });
+      
+  </script>
+  </body>
+</html>
+

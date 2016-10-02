@@ -1,0 +1,35 @@
+{% extends "diseño.html" %}
+{% block body %}
+
+  <head>
+       <title>Inicio Procesos contratacion</title>  
+    </head>
+    <br>
+<div class="container">
+    <div class="header">
+        <h2 class="text-muted" align="center">Procesos de Contratación</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form method=POST action="{{ url_for('login') }}">
+              <div class="jumbotron">
+                <form class="form-signin">
+                <div class="form-group">
+                    <h4><label for="exampleInputEmail1">Usuario</label></h4>
+                    <input type="text" class="form-control" name="username" placeholder="Username"></div>
+                <div class="form-group">
+                    <h4><label for="exampleInputPassword1">Contraseña</label></h4>
+                    <input type="password" class="form-control" name="pass" placeholder="Password"></div>
+                    <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+                    </form>
+                </div>
+            </form>
+            <div> <h5>Aun no te has registrado? <a href="{{ url_for('register') }}">Registrate Aquí</a>.</h5>
+                 <h5>Olvidaste tu contraseña? <a href="{{ url_for('recordar') }}" target="_blank"> Haz click Aquí</a>.</h5>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

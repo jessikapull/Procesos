@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Notificaciones</title>  
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+     <script src="/static/jquery.min.js"></script>
+
+     <script language="JavaScript">
+     //mensaje de bienvenida
+     alert("Si es tu primera vez en la pagina, recuerda seleccionar contratos para que los puedas visualizar en esta seccion, o esperar un correo electronico si ya los elegiste");</script>
+
+  </head>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <h2><a href="/" class="btn btn-default navbar-btn">Inicio</a>
+    <a href="/filtrar" class="btn btn-default navbar-btn">Filtrar Contratos</a>
+    <a href="/notificaciones" class="btn btn-default"> Preferencias </a>
+    <a href="/logout" class="btn btn-default navbar-btn">Cerrar Sesión</a>
+    </h2>
+
+    </div>
+  </div><!-- /.container -->
+</nav>
+
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Procesos de Contratación</h3>
+      </div>
+
+    <div>
+       
+      <div class="panel panel-default" >
+      <div class="panel-heading"> <h2 align="center"><b>Notificaciones</b></h2></div>
+  
+  <div class="panel-body">
+    <br>
+  <p align="justify"> A continuación,  se le presentan una lista de procesos que usted ha elegido.
+   Estos procesos tienen una clasifación de <b>RECOMENDABLE Y NO RECOMENDABLE.</b>
+   La clasificación se hace con base a un conjunto de procesos de años anteriores, que teniendo esas mismas caracteristicas, terminaron antes de tiempo.
+     Nos basamos en los critérios: <b>DEPARTAMENTO DE EJECUCIÓN, CUANTÍA DEL CONTRATO Y OBJETO DEL CONTRATO</b> para poder llegar a un porcentaje como conclusión, de la probabilidad de que el proceso de contratación no se termine satisfactoriamente.</p>
+  <br>
+  <p align="justify"> El Porcentaje que aparece en <font color="red"><b>ROJO</b></font>, hace referencia al nivel de confianza de que el proceso pueda ser o no recomendable.
+  
+  </p>
+  <p> <b>Para mas información te puedes dirigir a la página de <a href="https://www.contratos.gov.co/consultas/inicioConsulta.do">Contratos.gov.co</a> en donde encontrarás informacion más detallada. </b> </p>
+<br>
+ <div id='response' class='col-lg-12 col-md-12 col-sm-12 col-xs-12' style='width: 100%;height: 500px;overflow-y: scroll;'> 
+                            
+  <form id="formid">
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <td bgcolor="#CEF6F5"colspan="8"> <h4 align="center"><b>Últimos Procesos Seleccionados, Precisión: {{precision}}%</b></h4></td>
+      </tr>
+      <tr bgcolor="#EFFBFB">
+        <th>Entidad </th>
+        <th>Tipo de Proceso</th>
+        <th>Cuantía</th>
+        <th>Estado del Proceso</th>
+        <th>Objeto del Proceso</th>
+        <th>Recomendable</th>
+        <th>NO Recomendable</th>
+        <th>Fecha de consulta </th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+    {% for x in cursor1 %}
+
+      <tr>
+       
+        <td>{{ x.Entidad }} </td>
+        <td>{{ x.Tipo_proceso }}</td>
+        <td>{{ x.Cuantia }}</td>
+        <td>{{ x.Estado }}</td> 
+        <td>{{ x.Objeto }}</td>
+        <td style="color:red">{{ x.ppv}}%</td>
+        <td>{{ x.npv}}%</td>
+        <td >{{ x.fecha }}</td>
+
+      </tr>
+
+    {% endfor %}
+
+
+<thead>
+  <tr>
+
+  <td bgcolor="#CEF6F5" colspan="8"> <h4 align="center"><b>Estos son Procesos de días anteriores</b></h4></td>
+  </tr>
+      <tr bgcolor="#EFFBFB">
+        <th>Entidad </th>
+        <th>Tipo de Proceso</th>
+        <th>Cuantía</th>
+        <th>Estado del Proceso</th>
+        <th>Objeto del Proceso</th>
+        <th>Recomendable</th>
+        <th>NO Recomendable</th>
+        <th>Fecha de consulta </th>
+
+        </tr>
+      </thead>
+    {% for x in cursor2 %}
+
+      <tr>
+       
+        <td>{{ x.Entidad }} </td>
+        <td>{{ x.Tipo_proceso }}</td>
+        <td>{{ x.Cuantia }}</td>
+        <td>{{ x.Estado }}</td> 
+        <td>{{ x.Objeto }}</td>
+        <td>{{ x.ppv}}</td>
+        <td>{{ x.npv}}</td>
+        <td>{{ x.fecha }}</td>
+
+      </tr>
+
+    {% endfor %}
+      </tbody>
+
+      </table>
+    </form>
+  </div>
+
+
+  <br>
+  </div>
+      <div>
+      </div>
+</div>
+<br>
+    </div>
+            
+      <footer class="footer">
+        <p>&copy; Company 2016</p>
+      </footer>
+
+    </div>
+  </body>
+</html>
